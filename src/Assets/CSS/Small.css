@@ -1,0 +1,42 @@
+.nav-btn {
+  display: none;
+}
+@media screen and (max-width: 800px) {
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(36, 124, 200);
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    cursor: pointer;
+    color: white;
+    right: 10px;
+    position: fixed;
+  }
+  div.nav-items {
+    margin-left: 0 !important;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    position: fixed;
+    right: 0px;
+    background-color: white;
+    top: 60px;
+    align-items: flex-end;
+    padding: 30px;
+    overflow: clip;
+    z-index: 9999999;
+  }
+  a.nav-item {
+    margin: 13px 0;
+  }
+}
+@media screen and (max-width: 600px) {
+  div.login-form {
+    width: 94vw;
+  }
+}

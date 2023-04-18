@@ -1,0 +1,29 @@
+.auth-container {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  box-sizing: border-box;
+  background: url("../IMG/DashboardBackground.png");
+}
+
+.login-image {
+  width: 150px;
+}
+.register-form,
+.login-form {
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--white-primary);
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+.register-form {
+  height: 540px;
+  width: 550px;
+  padding: 25px;
+}
+.login-form {
+  height: 350px;
+  padding: 30px;
+  width: 500px;
+}

@@ -1,0 +1,20 @@
+.dashboard-row {
+  align-items: center;
+  justify-content: space-between;
+}
+.dashboard-link {
+  border: 1px solid var(--chakra-fine-blue);
+  border-radius: 10px;
+  padding: 20px;
+  width: 45%;
+  cursor: pointer;
+}
+.dashboard-link-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.dashboard-link-image {
+  width: 90px;
+  height: 90px;
+}
