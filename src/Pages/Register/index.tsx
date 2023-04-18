@@ -66,7 +66,8 @@ export const Register = () => {
       firstName.length > 0 &&
       password.length >= 7 &&
       phone.length === 10 &&
-      key.length === 16
+      key.length === 16 &&
+      title.length !== 0
     ) {
       setFormSubmitting(true);
       const response: DefaultResponse = await FetchData({
@@ -147,6 +148,13 @@ export const Register = () => {
                   description: "Please enter a valid phone number",
                   status: "error",
                 });
+              } else {
+                if (title.length !== 10) {
+                  addToast({
+                    description: "Please provide your title",
+                    status: "error",
+                  });
+                }
               }
             }
           }

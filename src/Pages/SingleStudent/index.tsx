@@ -65,7 +65,7 @@ export default function SingleStudent() {
       if (student?.supervisor.length > 0) {
         FetchData({
           type: "GET",
-          route: Endpoints.GetSingleSupervisor.concat(student.supervisor),
+          route: Endpoints.GetSupervisorProfile,
         }).then((SUPERVISORRESPONSE: SingleSupervisorResponse) => {
           if (SUPERVISORRESPONSE.data.auth) {
             setStudentSupervisor(SUPERVISORRESPONSE.data.data);

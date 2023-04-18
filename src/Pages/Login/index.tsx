@@ -28,7 +28,7 @@ export const Login = () => {
       e.preventDefault();
       setFormSubmitting(true);
       const response: LoginResponse = await FetchData({
-        route: Endpoints.StudentLogin,
+        route: Endpoints.LoginSupervisor,
         type: "POST",
         data: Form,
       }).catch(() => {
@@ -40,7 +40,7 @@ export const Login = () => {
       setFormSubmitting(false);
       console.log(response);
       if (response.data.auth) {
-        Cookies.set("student_token", response.data.data);
+        Cookies.set("supervisor_token", response.data.data);
         window.location.href = "/home";
       } else {
         addToast({

@@ -6,10 +6,9 @@ enum Endpoints {
   ValidateAdminPassword = "/admin/password/validate",
   UpdateAdminPassword = "/admin/password/update",
   GetStudents = "/admin/students",
-  GenerateStudentToken = "/admin/student/token/generate",
+  GenerateSupervisorToken = "/admin/student/token/generate",
   GenerateSupervisorKey = "/admin/supervisor/key/generate",
   GetSupervisorProfiles = "/admin/supervisors",
-  GetSingleSupervisor = "/supervisor/profile/",
   GetSupervisorStudents = "/supervisor/students",
   AssignStudentToSupervisor = "/admin/supervisor/student/assign",
   UnassignStudentToSupervisor = "/admin/supervisor/student/remove",
@@ -18,7 +17,7 @@ enum Endpoints {
   VerifyResetToken = "/reset/verify",
 
   StudentRegister = "/student/register",
-  ValidateStudentToken = "/student/token/validate",
+  ValidateSupervisorToken = "/student/token/validate",
   ValidateStudentAuth = "/student/auth/validate",
   StudentLogin = "/student/login",
   GetSingleStudent = "/student/profile/",
@@ -32,5 +31,6 @@ enum Endpoints {
   RegisterSupervisor = "/supervisor/register",
   LoginSupervisor = "/supervisor/login",
   ForceUpdateSupervisorPassword = "/supervisor/password/update/force",
+  GetSupervisorProfile = "/supervisor/profile/currentIsSupervisor",
 }
 export { Endpoints };

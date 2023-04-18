@@ -57,8 +57,8 @@ export default function Students() {
 
   const [searchString, setSearchString] = useState<string>("");
 
-  const [studentToken, setStudentToken] = useState<string>("");
-  const [isStudentTokenGenerating, setStudentTokenGenerating] =
+  const [supervisorToken, setSupervisorToken] = useState<string>("");
+  const [isSupervisorTokenGenerating, setSupervisorTokenGenerating] =
     useState<boolean>(false);
 
   const DataHeaders = [
@@ -181,21 +181,21 @@ export default function Students() {
     }
   };
 
-  const generateStudentToken = () => {
-    setStudentTokenGenerating(true);
+  const generateSupervisorToken = () => {
+    setSupervisorTokenGenerating(true);
     FetchData({
-      route: Endpoints.GenerateStudentToken,
+      route: Endpoints.GenerateSupervisorToken,
       type: "GET",
     })
       .then((response: DefaultResponse) => {
         if (response.data.auth) {
           const token = response.data.data;
-          setStudentToken(token);
+          setSupervisorToken(token);
         }
-        setStudentTokenGenerating(false);
+        setSupervisorTokenGenerating(false);
       })
       .catch(() => {
-        setStudentTokenGenerating(false);
+        setSupervisorTokenGenerating(false);
       });
   };
   return (
@@ -204,11 +204,11 @@ export default function Students() {
       <Stack direction={"row"} spacing={5}>
         <Button
           colorScheme={"linkedin"}
-          onClick={generateStudentToken}
+          onClick={generateSupervisorToken}
           width={"230px"}
         >
           Generate Token &nbsp;{" "}
-          {isStudentTokenGenerating && (
+          {isSupervisorTokenGenerating && (
             <i className="far fa-spinner-third fa-spin" />
           )}
         </Button>
@@ -220,7 +220,7 @@ export default function Students() {
           Send Notification &nbsp;{" "}
         </Button>
       </Stack>
-      {studentToken.length > 0 && (
+      {supervisorToken.length > 0 && (
         <Card width={"230px"} marginTop={2}>
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
@@ -230,7 +230,7 @@ export default function Students() {
                 </Heading>
                 <Stack direction={"row"} alignItems="center">
                   <Text pt="2" fontSize="sm" letterSpacing={1.2}>
-                    {studentToken.toUpperCase()}
+                    {supervisorToken.toUpperCase()}
                   </Text>
                   <CopyToClipboard
                     onCopy={() =>
@@ -239,7 +239,7 @@ export default function Students() {
                         status: "success",
                       })
                     }
-                    text={studentToken.toUpperCase()}
+                    text={supervisorToken.toUpperCase()}
                   >
                     <Text
                       pt="2"

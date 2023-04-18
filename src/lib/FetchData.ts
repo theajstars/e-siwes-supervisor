@@ -7,7 +7,7 @@ interface FetchDataParams {
   route: string;
   data?: any;
 }
-const token = Cookies.get("student_token");
+const token = Cookies.get("supervisor_token");
 
 const FetchData = async ({ type, route, data }: FetchDataParams) => {
   const NoTokenRequiredRoutes: string[] = [

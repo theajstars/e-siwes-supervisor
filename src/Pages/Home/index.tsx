@@ -14,20 +14,17 @@ import Container from "../Container";
 import Navbar from "../Navbar";
 import Profile from "../Profile";
 import Students from "../Students";
-import Supervisors from "../Supervisors";
 
 import Dashboard from "../Dashboard";
 import Cookies from "js-cookie";
-import Notification from "../Notification";
 import SingleSupervisor from "../SingleSupervisor";
 import SingleStudent from "../SingleStudent";
-import Payments from "../Payments";
 import Documents from "../Documents";
 export default function Home() {
   const navigate = useNavigate();
   useEffect(() => {
-    const studentToken = Cookies.get("student_token");
-    if (!studentToken) {
+    const supervisorToken = Cookies.get("supervisor_token");
+    if (!supervisorToken) {
       navigate("/login");
     } else {
       FetchData({
@@ -50,7 +47,6 @@ export default function Home() {
           <Route>
             <Route path="/" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/payments" element={<Payments />} />
             <Route path="/documents" element={<Documents />} />
             {/* <Route path="/supervisors" element={<Supervisors />} />
             <Route

@@ -25,7 +25,7 @@ export default function Navbar() {
   }, [location]);
 
   const logout = () => {
-    Cookies.remove("student_token");
+    Cookies.remove("supervisor_token");
     window.location.href = "/login";
   };
 
@@ -86,6 +86,14 @@ export default function Navbar() {
               }`}
             >
               Profile
+            </Link>
+            <Link
+              to="/home/students"
+              className={`nav-item ${
+                activeItem === "Students" ? "nav-item-active" : ""
+              }`}
+            >
+              Students
             </Link>
             <Tag
               size="lg"
