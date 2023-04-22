@@ -70,7 +70,7 @@ export default function Profile() {
   const ValidateStudentPassword = async (passwordToValidate: string) => {
     const validatePassword: ValidatePasswordResponse = await FetchData({
       type: "POST",
-      route: Endpoints.ValidateStudentPassword,
+      route: Endpoints.ValidateSupervisorPassword,
       data: { password: passwordToValidate },
     });
     return validatePassword.data.auth;
@@ -100,7 +100,7 @@ export default function Profile() {
           });
         } else {
           const UpdateRequest: DefaultResponse = await FetchData({
-            route: Endpoints.UpdateStudentPassword,
+            route: Endpoints.UpdateSupervisorPassword,
             type: "POST",
             data: { password: newPassword },
           }).catch(() => {
@@ -125,7 +125,36 @@ export default function Profile() {
       }
     }
   };
-  const SubmitBasicProfile = async () => {};
+  const SubmitBasicProfile = async () => {
+    if (supervisor) {
+      setBasicProfileUpdating(true);
+      const { firstName, lastName, email, phone, title } = supervisor;
+      const updateProfile: DefaultResponse = await FetchData({
+        route: Endpoints.UpdateSupervisorProfile,
+        type: "POST",
+        data: { firstName, lastName, email, phone, title },
+      }).catch(() => {
+        setBasicProfileUpdating(false);
+        addToast({
+          description: "An unexpected error occured!",
+          status: "error",
+        });
+      });
+      setBasicProfileUpdating(false);
+
+      if (updateProfile.data.auth) {
+        addToast({
+          description: "Your profile was updated",
+          status: "success",
+        });
+      } else {
+        addToast({
+          description: "Your profile could not be updated!",
+          status: "warning",
+        });
+      }
+    }
+  };
 
   return (
     <>

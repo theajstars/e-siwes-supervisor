@@ -30,7 +30,10 @@ enum Endpoints {
 
   RegisterSupervisor = "/supervisor/register",
   LoginSupervisor = "/supervisor/login",
+  ValidateSupervisorPassword = "/supervisor/password/validate",
+  UpdateSupervisorPassword = "/supervisor/password/update",
   ForceUpdateSupervisorPassword = "/supervisor/password/update/force",
   GetSupervisorProfile = "/supervisor/profile/currentIsSupervisor",
+  UpdateSupervisorProfile = "/supervisor/profile/update",
 }
 export { Endpoints };
