@@ -48,13 +48,14 @@ export default function Home() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/documents" element={<Documents />} />
+            <Route path="/students" element={<Students />} />
+            <Route path="/students/:studentID" element={<SingleStudent />} />
             {/* <Route path="/supervisors" element={<Supervisors />} />
             <Route
               path="/supervisors/:supervisorID"
               element={<SingleSupervisor />}
             />
             <Route path="/students" element={<Students />} />
-            <Route path="/students/:studentID" element={<SingleStudent />} />
             <Route path="/notification" element={<Notification />} /> */}
           </Route>
         </Routes>

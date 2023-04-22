@@ -9,7 +9,7 @@ enum Endpoints {
   GenerateSupervisorToken = "/admin/student/token/generate",
   GenerateSupervisorKey = "/admin/supervisor/key/generate",
   GetSupervisorProfiles = "/admin/supervisors",
-  GetSupervisorStudents = "/supervisor/students",
+
   AssignStudentToSupervisor = "/admin/supervisor/student/assign",
   UnassignStudentToSupervisor = "/admin/supervisor/student/remove",
   SendStudentNotification = "/admin/student/notification/send",
@@ -35,5 +35,6 @@ enum Endpoints {
   ForceUpdateSupervisorPassword = "/supervisor/password/update/force",
   GetSupervisorProfile = "/supervisor/profile/currentIsSupervisor",
   UpdateSupervisorProfile = "/supervisor/profile/update",
+  GetSupervisorStudents = "/supervisor/students/get",
 }
 export { Endpoints };

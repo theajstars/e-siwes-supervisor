@@ -43,10 +43,10 @@ export default function SingleStudent() {
 
   const fetchStudent = async () => {
     const STUDENTREQUEST: SingleStudentResponse = await FetchData({
-      route: Endpoints.GetSingleStudent.concat(studentID || ""),
+      route: Endpoints.GetSingleStudent.concat(studentID ?? ""),
       type: "GET",
     });
-    console.log(STUDENTREQUEST.data.data);
+    console.log(STUDENTREQUEST);
     if (STUDENTREQUEST.data.auth) {
       setStudent(STUDENTREQUEST.data.data);
     } else {

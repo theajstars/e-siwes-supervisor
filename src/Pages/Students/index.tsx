@@ -39,6 +39,7 @@ import {
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { CSVLink } from "react-csv";
+import { getCourseName } from "../../App";
 
 export default function Students() {
   const addToast = useToast();
@@ -84,9 +85,10 @@ export default function Students() {
     setIsDataFetching(true);
     FetchData({
       type: "GET",
-      route: Endpoints.GetStudents,
+      route: Endpoints.GetSupervisorStudents,
     })
       .then((response: StudentResponse) => {
+        console.log(response);
         setIsDataFetching(false);
         if (response.data.auth) {
           console.log(response.data.data);
@@ -181,96 +183,13 @@ export default function Students() {
     }
   };
 
-  const generateSupervisorToken = () => {
-    setSupervisorTokenGenerating(true);
-    FetchData({
-      route: Endpoints.GenerateSupervisorToken,
-      type: "GET",
-    })
-      .then((response: DefaultResponse) => {
-        if (response.data.auth) {
-          const token = response.data.data;
-          setSupervisorToken(token);
-        }
-        setSupervisorTokenGenerating(false);
-      })
-      .catch(() => {
-        setSupervisorTokenGenerating(false);
-      });
-  };
   return (
     <>
       <br />
-      <Stack direction={"row"} spacing={5}>
-        <Button
-          colorScheme={"linkedin"}
-          onClick={generateSupervisorToken}
-          width={"230px"}
-        >
-          Generate Token &nbsp;{" "}
-          {isSupervisorTokenGenerating && (
-            <i className="far fa-spinner-third fa-spin" />
-          )}
-        </Button>
-        <Button
-          width={"230px"}
-          colorScheme={"orange"}
-          onClick={() => navigate("/home/notification")}
-        >
-          Send Notification &nbsp;{" "}
-        </Button>
-      </Stack>
-      {supervisorToken.length > 0 && (
-        <Card width={"230px"} marginTop={2}>
-          <CardBody>
-            <Stack divider={<StackDivider />} spacing="4">
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Token
-                </Heading>
-                <Stack direction={"row"} alignItems="center">
-                  <Text pt="2" fontSize="sm" letterSpacing={1.2}>
-                    {supervisorToken.toUpperCase()}
-                  </Text>
-                  <CopyToClipboard
-                    onCopy={() =>
-                      addToast({
-                        description: "Copied!",
-                        status: "success",
-                      })
-                    }
-                    text={supervisorToken.toUpperCase()}
-                  >
-                    <Text
-                      pt="2"
-                      fontSize={"18px"}
-                      color={"blue.900"}
-                      cursor="pointer"
-                    >
-                      <i className="far fa-clipboard" />
-                    </Text>
-                  </CopyToClipboard>
-                </Stack>
-              </Box>
-            </Stack>
-          </CardBody>
-        </Card>
-      )}
       <br />
-      <br />
-      <Text size={"24px"}>Filter Table</Text>
-      <br />
+
       <StackDivider />
-      <InputGroup>
-        <InputLeftAddon children="Search" />
-        <Input
-          type="search"
-          value={searchString}
-          onChange={(e) => setSearchString(e.target.value)}
-          placeholder="Find student by Name, Course, Matric Number"
-          spellCheck={false}
-        />
-      </InputGroup>
+
       <br />
       <Stack spacing={5} direction="row">
         <Checkbox
@@ -409,7 +328,7 @@ export default function Students() {
                       )}
 
                       <Td>{student.yearOfStudy}</Td>
-                      <Td>{student.courseOfStudy}</Td>
+                      <Td>{getCourseName(student.courseOfStudy)}</Td>
                       {viewInternshipDetails && (
                         <>
                           <Td>{student.attachmentPeriod}</Td>

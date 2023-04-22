@@ -11,6 +11,7 @@ import SingleStudent from "./Pages/SingleStudent";
 import Reset from "./Pages/Reset";
 import { Register } from "./Pages/Register";
 import Documents from "./Pages/Documents";
+import { CourseProgrammes } from "./lib/ResponseTypes";
 
 function validateEmail(email: string) {
   const re =
@@ -80,6 +81,27 @@ const Banks = [
   { id: "22", name: "Wema Bank", code: "035" },
   { id: "23", name: "Zenith Bank", code: "057" },
 ];
+const getCourseName = (courseSlug: CourseProgrammes) => {
+  if (courseSlug) {
+    switch (courseSlug) {
+      case "cyber_security":
+        return "Cyber Security";
+        break;
+      case "computer_science":
+        return "Computer Science";
+        break;
+      case "information_technology":
+        return "Information Technology";
+        break;
+      case "software_engineering":
+        return "Software Engineering";
+        break;
+      default:
+        return undefined;
+    }
+  }
+  return undefined;
+};
 function App() {
   return (
     <Router>
@@ -106,5 +128,5 @@ function App() {
   );
 }
 
-export { validateEmail, getPayStackConfig, getFullDate, Banks };
+export { validateEmail, getPayStackConfig, getFullDate, Banks, getCourseName };
 export default App;

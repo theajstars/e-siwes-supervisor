@@ -63,7 +63,7 @@ export const Login = () => {
             onChange={(e) => {
               SetForm({ ...Form, email: e.target.value });
             }}
-            placeholder="Matric Number"
+            placeholder="Email Address"
             spellCheck={false}
           />
           <Input
