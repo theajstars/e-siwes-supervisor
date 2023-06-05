@@ -36,5 +36,7 @@ enum Endpoints {
   GetSupervisorProfile = "/supervisor/profile/currentIsSupervisor",
   UpdateSupervisorProfile = "/supervisor/profile/update",
   GetSupervisorStudents = "/supervisor/students/get",
+  SendStudentMessage = "/supervisor/comment",
+  GetStudentMessages = "/supervisor/comments/all",
 }
 export { Endpoints };

@@ -9,11 +9,13 @@ import {
   CardBody,
   CardHeader,
   Heading,
+  Input,
   Stack,
   StackDivider,
   Stat,
   StatLabel,
   Table,
+  Button,
   TableContainer,
   Tbody,
   Td,
@@ -22,8 +24,14 @@ import {
   Thead,
   Tr,
   useToast,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Divider,
 } from "@chakra-ui/react";
 import {
+  DefaultResponse,
   SingleStudentResponse,
   SingleSupervisorResponse,
   Student,
@@ -32,6 +40,14 @@ import {
 import { FetchData } from "../../lib/FetchData";
 import { Endpoints } from "../../lib/Endpoints";
 
+interface MessageProp {
+  comment: string;
+  student: string;
+  supervisor: string;
+  studentName: string;
+  supervisorName: string;
+  sender: "supervisor" | "student";
+}
 export default function SingleStudent() {
   const addToast = useToast();
   const params = useParams();
@@ -40,7 +56,7 @@ export default function SingleStudent() {
   const [studentSupervisor, setStudentSupervisor] = useState<
     Supervisor | undefined
   >();
-
+  const [messages, setMessages] = useState<MessageProp[]>([]);
   const fetchStudent = async () => {
     const STUDENTREQUEST: SingleStudentResponse = await FetchData({
       route: Endpoints.GetSingleStudent.concat(studentID ?? ""),
@@ -60,6 +76,16 @@ export default function SingleStudent() {
   useEffect(() => {
     fetchStudent();
   }, []);
+  //Fetch student and supervisor messages
+  const fetchComments = async (studentID: string) => {
+    const r: DefaultResponse = await FetchData({
+      route: Endpoints.GetStudentMessages,
+      type: "POST",
+      data: { studentID: studentID },
+    });
+    console.log(r.data);
+    setMessages(r.data.data ?? []);
+  };
   useEffect(() => {
     if (student?.id) {
       if (student?.supervisor.length > 0) {
@@ -68,6 +94,7 @@ export default function SingleStudent() {
           route: Endpoints.GetSupervisorProfile,
         }).then((SUPERVISORRESPONSE: SingleSupervisorResponse) => {
           if (SUPERVISORRESPONSE.data.auth) {
+            fetchComments(student.id);
             setStudentSupervisor(SUPERVISORRESPONSE.data.data);
           }
         });
@@ -76,6 +103,27 @@ export default function SingleStudent() {
   }, [student]);
   const isLengthPlusOne = (val: string) => {
     return val.length > 0;
+  };
+
+  const [message, setMessage] = useState<string>("");
+  const SendMessage = async () => {
+    if (message.length === 0) {
+      addToast({ description: "Please enter a message", status: "error" });
+    } else {
+      const r: DefaultResponse = await FetchData({
+        route: Endpoints.SendStudentMessage,
+        type: "POST",
+        data: {
+          comment: message,
+          studentID: studentID,
+        },
+      }).catch(() => {
+        addToast({ description: "An error occured", status: "error" });
+      });
+      setMessage("");
+      fetchComments(student ? student.id : "");
+      console.log(r);
+    }
   };
   return (
     <>
@@ -290,7 +338,63 @@ export default function SingleStudent() {
               </CardBody>
             </Card>
             <br />
-
+            <Stack direction="column" width="100%">
+              <br />
+              <Divider width="100%" />
+              <br />
+              <Text fontSize={18} fontWeight="500">
+                Messages
+              </Text>
+              {messages.length === 0 ? (
+                <center>
+                  <Alert status="info" width={"80%"} my="20px">
+                    <AlertIcon />
+                    <AlertTitle>No Messages!</AlertTitle>
+                    <AlertDescription>
+                      There are no messages found.
+                    </AlertDescription>
+                  </Alert>
+                </center>
+              ) : (
+                <Card>
+                  <CardBody>
+                    <Stack divider={<StackDivider />} spacing="4">
+                      {messages.map((message, index) => {
+                        return (
+                          <Box key={index}>
+                            <Heading size="xs" textTransform="capitalize">
+                              {message.sender === "student"
+                                ? `${message.studentName}`
+                                : `${message.supervisorName}`}
+                            </Heading>
+                            <Text pt="2" fontSize="sm">
+                              {message.comment}
+                            </Text>
+                          </Box>
+                        );
+                      })}
+                    </Stack>
+                  </CardBody>
+                </Card>
+              )}
+              <Stack direction="row" justifyContent="space-between">
+                <Input
+                  width={"80%"}
+                  placeholder="Leave message..."
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                />
+                <Button
+                  colorScheme="linkedin"
+                  width="17%"
+                  onClick={SendMessage}
+                >
+                  Send
+                </Button>
+              </Stack>
+            </Stack>
             <br />
           </>
         )}
