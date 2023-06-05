@@ -59,6 +59,7 @@ export interface Student {
   firstName: string;
   lastName: string;
   email: string;
+  college: string;
   password: string;
   phone: string;
   matricNumber: string;

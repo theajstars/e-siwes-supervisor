@@ -117,6 +117,14 @@ export default function SingleStudent() {
                   </Box>
                   <Box>
                     <Heading size="xs" textTransform="uppercase">
+                      College
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      {student.college}
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
                       Course of Study
                     </Heading>
                     <Text pt="2" fontSize="sm">
@@ -129,11 +137,11 @@ export default function SingleStudent() {
                   </Box>
                   <Box>
                     <Heading size="xs" textTransform="uppercase">
-                      Year of Study
+                      Current Level
                     </Heading>
                     <Text pt="2" fontSize="sm">
-                      {isLengthPlusOne(student.yearOfStudy) ? (
-                        student.yearOfStudy
+                      {isLengthPlusOne(student.level) ? (
+                        student.level
                       ) : (
                         <i>undefined</i>
                       )}

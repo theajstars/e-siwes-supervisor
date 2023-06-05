@@ -258,7 +258,7 @@ export default function Students() {
                   <Th>Email</Th>
                   <Th>Phone Number</Th>
                   <Th>Payment Status</Th>
-                  <Th>Supervisor</Th>
+
                   {viewBankDetails && (
                     <>
                       <Th>Bank Name</Th>
@@ -294,30 +294,7 @@ export default function Students() {
                       <Td color={student.hasPaid ? "blue.600" : "red.500"}>
                         {student.hasPaid ? "Paid" : "Not Paid"}
                       </Td>
-                      <Td>
-                        {supervisor === null ? (
-                          <Text
-                            backgroundColor={"linkedin.600"}
-                            color={"white"}
-                            padding={1}
-                            fontSize={15}
-                          >
-                            <i>No Supervisor assigned</i>
-                          </Text>
-                        ) : (
-                          <Link
-                            to={"/home/supervisors/".concat(student.supervisor)}
-                          >
-                            <Text
-                              textDecorationColor={"linkedin.500"}
-                              textDecoration="underline"
-                              color={"linkedin.500"}
-                            >
-                              {supervisor}
-                            </Text>
-                          </Link>
-                        )}
-                      </Td>
+
                       {viewBankDetails && (
                         <>
                           <Td>{student.bankAccount.name}</Td>
@@ -371,7 +348,7 @@ export default function Students() {
       ) : (
         <center>
           {!IsStudentLoading && (
-            <Text fontSize="xl">There are currently no students!</Text>
+            <Text fontSize="xl">You have no students!</Text>
           )}
         </center>
       )}

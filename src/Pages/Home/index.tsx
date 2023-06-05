@@ -23,21 +23,21 @@ import Documents from "../Documents";
 export default function Home() {
   const navigate = useNavigate();
   useEffect(() => {
-    const supervisorToken = Cookies.get("supervisor_token");
-    if (!supervisorToken) {
-      navigate("/login");
-    } else {
-      FetchData({
-        type: "GET",
-        route: Endpoints.ValidateStudentAuth,
-      }).then((res: ValidateStudentAuthResponse) => {
-        console.log("Auth response: ", res);
-        const { auth } = res.data;
-        if (!auth) {
-          navigate("/login");
-        }
-      });
-    }
+    // const supervisorToken = Cookies.get("supervisor_token");
+    // if (!supervisorToken) {
+    //   navigate("/login");
+    // } else {
+    //   FetchData({
+    //     type: "GET",
+    //     route: Endpoints.ValidateStudentAuth,
+    //   }).then((res: ValidateStudentAuthResponse) => {
+    //     console.log("Auth response: ", res);
+    //     const { auth } = res.data;
+    //     if (!auth) {
+    //       navigate("/login");
+    //     }
+    //   });
+    // }
   }, []);
   return (
     <>
