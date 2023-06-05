@@ -25,7 +25,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [supervisorProfile, setSupervisorProfile] = useState<Supervisor>();
   useEffect(() => {
-    // Get Student Profile
+    // Get Supervisor Profile
     FetchData({
       type: "GET",
       route: Endpoints.GetSupervisorProfile,
