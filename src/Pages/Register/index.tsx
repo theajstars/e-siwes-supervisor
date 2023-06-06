@@ -84,7 +84,7 @@ export const Register = () => {
       console.log(response);
       if (response.data.auth) {
         Cookies.set("supervisor_token", response.data.data);
-        window.location.href = "/home";
+        window.location.href = "/login";
       } else {
         const SUPERVISOR_KEY_NOT_VALID =
           "SUPERVISOR KEY is not valid".toLowerCase();
